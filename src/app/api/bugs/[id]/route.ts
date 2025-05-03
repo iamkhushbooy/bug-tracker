@@ -2,10 +2,14 @@ import { connectDB } from '@/db/connectDB';
 import bugSchema from '@/db/model/bugSchema';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_req: NextRequest, {
+    params,
+  }: {
+    params: Promise<{ id: string }>
+  }) {
     try {
         await connectDB();
-        const { id } = params;
+        const { id } =await params;
         const bug = await bugSchema.findById(id);
 
         if (!bug) {
@@ -19,10 +23,14 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
     }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, {
+    params,
+  }: {
+    params: Promise<{ id: string }>
+  }) {
     try {
         await connectDB();
-        const { id } = params;
+        const { id } = await params;
         const updatedData = await req.json();
 
         const updatedBug = await bugSchema.findByIdAndUpdate(id, updatedData, { new: true });
