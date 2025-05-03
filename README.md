@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Bug Tracking Application
 
-First, run the development server:
+A full-featured bug tracking system developed as part of an assignment for **Swapnil Soft**. This application helps developers track, manage, and resolve bugs efficiently using a clean and modular full-stack architecture.
 
+---
+
+## Features
+
+- View all reported bugs
+- Add new bugs with title, description, status, severity, and assigned user
+- Edit bug details
+- Delete bugs
+- Filter bugs by:
+  - Status (Open, In Progress, Closed)
+  - Priority (Low, Medium, High)
+- Search bugs by title in real-time
+- Responsive and clean user interface
+
+---
+
+## Tech Stack
+
+- **Frontend:** Next.js 14 (App Router), React, Tailwind CSS  
+- **Backend:** Next.js API Routes  
+- **Database:** MongoDB with Mongoose  
+- **State Management:** React Hooks (`useState`, `useEffect`)  
+- **Deployment:** Vercel  
+
+---
+
+## Setup Instructions
+
+Follow these steps to run the project locally:
+
+### 1. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/iamkhushbooy/bug-tracker.git
+cd bug-tracker
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Add Environment Variables
+Create a `.env.local` file and add the following:
+```env
+MONGODB_URI=your_mongodb_connection_string
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Start the Development Server
+```bash
+npm run dev
+```
 
-## Learn More
+The app will be live at:  
+`http://localhost:3000`
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## My Approach
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Overall Strategy
+This app was developed with a focus on usability and clean design. I first implemented core **CRUD functionality**, then gradually added **filter**, **search**, and **modular UI components** to enhance user experience.
 
-## Deploy on Vercel
+### Architecture Highlights
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Frontend:** Built with the App Router in Next.js 14 for routing and API integration.
+- **Backend:** Uses server actions and API routes, connected to MongoDB via Mongoose.
+- **UI:** Tailwind CSS is used for responsive and minimal design.
+- **Search & Filter:** Client-side real-time search and dropdown filters for priority, status and title.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Future Enhancements
+
+- [ ] User authentication (JWT or NextAuth)
+- [ ] Role-based access (Admin, Developer, Tester)
+- [ ] Comment threads per bug
+- [ ] Real-time updates with Socket.IO/WebSocket
+- [ ] Assign bugs to users
+- [ ] Email notifications on updates
+- [ ] Attach screenshots or files to bugs
+- [ ] Bug history and change logs
+- [ ] Export bug reports (CSV/PDF)
+- [ ] Analytics dashboard
+
+---
+
+## Developer
+
+**Khushboo Yadav**  
+B.Tech Mechanical Engineering | Aspiring Full Stack Developer  
+🔗 GitHub: [@iamkhushbooy](https://github.com/iamkhushbooy)
+
+---
+
+## Acknowledgements
+
+This project was developed as an assignment for **Swapnil Soft** to demonstrate skills in full-stack development, project architecture, and clean UI design. Inspired by real-world tools like Jira, GitHub Issues, and Trello.
+
+---
+

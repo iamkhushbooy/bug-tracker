@@ -1,11 +1,12 @@
 'use client';
 
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
+import axios from 'axios';
 export default function BugDetails() {
     const params = useParams();
+    const router = useRouter();
     const id = params.id as string;
     const [bug, setBug] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
@@ -13,7 +14,7 @@ export default function BugDetails() {
     useEffect(() => {
         const fetchBug = async () => {
             try {
-                const res = await fetch(`https://bug-tracker-ebon.vercel.app/api/bugs/${id}`);
+                const res = await fetch(`/api/bugs/${id}`);
                 if (!res.ok) {
                     setError(`Error: ${res.status}`);
                     return;
@@ -34,6 +35,20 @@ export default function BugDetails() {
 
         fetchBug();
     }, [id]);
+
+    const del= async (id: string) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this bug?");
+        if (!confirmDelete) return;
+    
+        try {
+            await axios.delete(`/api/bugs/${id}`);
+            router.push('/')
+        } catch (err) {
+            console.error('Failed to delete bug:', err);
+            alert("Failed to delete the bug. Please try again.");
+        }
+    };
+
 
     if (error) {
         return (
@@ -61,7 +76,19 @@ export default function BugDetails() {
                 <p><strong>Priority:</strong> {bug.priority}</p>
                 <p><strong>Assigned To:</strong> {bug.assignedTo}</p>
             </div>
-            <div className="mt-6">
+            <div className="mt-6 flex gap-4">
+                <Link
+                    href={`/bug/${bug._id}/edit`}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
+                >
+                    ✏️ Edit
+                </Link>
+                <button
+                  onClick={()=>del(bug._id)}
+                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+                >
+                    🗑️ Delete
+                </button>
                 <Link href="/">
                     <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
                         ⬅ Back to Bugs

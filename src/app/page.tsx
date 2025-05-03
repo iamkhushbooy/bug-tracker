@@ -5,7 +5,7 @@ import Link from 'next/link';
 import axios from 'axios';
 
 export default function BugList() {
-    const [bugs, setBugs] = useState([]);
+    const [bugs, setBugs] = useState<{ _id: string; title: string; priority: string; status: string; assignedTo: string }[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
     const [priorityFilter, setPriorityFilter] = useState('');
@@ -29,7 +29,19 @@ export default function BugList() {
         const matchesPriority = priorityFilter ? bug.priority === priorityFilter : true;
         return matchesTitle && matchesStatus && matchesPriority;
     });
-
+    const del = async (id: string) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this bug?");
+        if (!confirmDelete) return;
+    
+        try {
+            await axios.delete(`/api/bugs/${id}`);
+            setBugs(prev => prev.filter(bug => bug._id !== id)); 
+        } catch (err) {
+            console.error('Failed to delete bug:', err);
+            alert("Failed to delete the bug. Please try again.");
+        }
+    };
+    
     return (
         <div className="p-4 sm:p-6">
             <h1 className="text-2xl font-bold mb-4">Bug Tracker</h1>
@@ -62,7 +74,7 @@ export default function BugList() {
                     <option value="High">High</option>
                 </select>
                 <Link
-                    href="/add"
+                    href="/addBug"
                     className="bg-blue-500 text-white px-4 py-2 rounded w-full sm:w-auto text-center"
                 >
                     + Add Bug
@@ -99,12 +111,13 @@ export default function BugList() {
                         </div>
 
                         {/* Desktop Row */}
-                        <div className="hidden sm:block">{bug.title}</div>
-                        <div className="hidden sm:block">{bug.priority}</div>
-                        <div className="hidden sm:block">{bug.status}</div>
-                        <div className="hidden sm:block">{bug.assignedTo}</div>
+                        <div className="hidden sm:block text-center">{bug.title}</div>
+                        <div className="hidden sm:block text-center">{bug.priority}</div>
+                        <div className="hidden sm:block text-center">{bug.status}</div>
+                        <div className="hidden sm:block text-center">{bug.assignedTo}</div>
                         <div className="hidden sm:flex justify-center gap-2">
                             <Link className="text-green-600" href={`/bug/${bug._id}/edit`}>Edit</Link>
+                            <button className="text-green-600" onClick={()=>del(bug._id)}>Delete</button>
                         </div>
                         <div className="hidden sm:block text-blue-600 text-center">
                             <Link href={`/bug/${bug._id}`}>View Details</Link>

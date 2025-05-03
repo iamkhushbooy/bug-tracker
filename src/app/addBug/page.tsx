@@ -2,13 +2,14 @@
 
 import { useState } from 'react';
 import axios from 'axios';
-
+import { useRouter } from 'next/navigation';
 export default function AddBug() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [status, setStatus] = useState('Open');
     const [priority, setPriority] = useState('Low');
     const [assignedTo, setAssignedTo] = useState('');
+    const router=useRouter();
 
     const handleSubmit = async () => {
         try {
@@ -27,6 +28,7 @@ export default function AddBug() {
                 setStatus('Open');
                 setPriority('Low');
                 setAssignedTo('');
+                router.push('/')
             } else {
                 alert('Failed to add bug');
             }
