@@ -81,7 +81,6 @@ export default function BugList() {
                 </Link>
             </div>
 
-            {/* Table Header for Desktop */}
             <div className="hidden sm:grid grid-cols-6 font-semibold bg-gray-200 text-center p-2 rounded-t">
                 <div>Title</div>
                 <div>Priority</div>
@@ -91,7 +90,7 @@ export default function BugList() {
                 <div>Details</div>
             </div>
 
-            {/* Bug Cards / Rows */}
+          
             {filteredBugs.length > 0 ? (
                 filteredBugs.map((bug: any) => (
                     <div
@@ -110,7 +109,7 @@ export default function BugList() {
                             </div>
                         </div>
 
-                        {/* Desktop Row */}
+                    
                         <div className="hidden sm:block text-center">{bug.title}</div>
                         <div className="hidden sm:block text-center">{bug.priority}</div>
                         <div className="hidden sm:block text-center">{bug.status}</div>
