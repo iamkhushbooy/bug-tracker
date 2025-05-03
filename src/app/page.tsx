@@ -86,7 +86,7 @@ export default function BugList() {
                         key={bug._id}
                         className="border-b sm:border-0 sm:grid sm:grid-cols-6 text-center sm:text-left p-2 items-center sm:items-start sm:gap-2"
                     >
-                        {/* Mobile Card */}
+                      
                         <div className="block sm:hidden w-full border rounded-lg p-3 mb-3 shadow-sm">
                             <div><strong>Title:</strong> {bug.title}</div>
                             <div><strong>Priority:</strong> {bug.priority}</div>

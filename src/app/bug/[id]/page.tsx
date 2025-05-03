@@ -13,7 +13,7 @@ export default function BugDetails() {
     useEffect(() => {
         const fetchBug = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/api/bugs/${id}`);
+                const res = await fetch(`https://bug-tracker-ebon.vercel.app/api/bugs/${id}`);
                 if (!res.ok) {
                     setError(`Error: ${res.status}`);
                     return;
